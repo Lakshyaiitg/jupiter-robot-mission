@@ -4,6 +4,6 @@ import response.Response;
 
 public interface Request {
 	
-	public Response process();
+	public Response process() throws Exception;
 
 }

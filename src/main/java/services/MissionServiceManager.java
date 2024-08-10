@@ -10,9 +10,9 @@ public interface MissionServiceManager {
 
 	public void setNewPlateau(Plateau plateau);
 
-	public void addRobot(int x, int y, Direction direction);
+	public void addRobot(int x, int y, Direction direction) throws Exception;
 
-	public void moveRobot(String commands);
+	public void moveRobot(String commands) throws Exception;
 
 	public String getRobotPostion();
 
