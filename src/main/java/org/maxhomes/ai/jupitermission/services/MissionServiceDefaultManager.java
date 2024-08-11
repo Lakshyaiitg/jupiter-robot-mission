@@ -48,8 +48,8 @@ public class MissionServiceDefaultManager implements MissionServiceManager {
 				System.out.println("Invalid Command");
 			}
 
-			if (plateau.getRobot().getX() > plateau.getCoordinateX()
-					|| plateau.getRobot().getY() > plateau.getCoordinateY()) {
+			if (plateau.getRobot().getCoordinateX() > plateau.getCoordinateX()
+					|| plateau.getRobot().getCoordinateY() > plateau.getCoordinateY()) {
 				throw new OutOfSignalException("Robot is out of signal");
 			}
 		}

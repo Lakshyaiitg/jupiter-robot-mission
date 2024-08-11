@@ -9,6 +9,7 @@ import org.maxhomes.ai.jupitermission.services.ServiceManager;
 
 public class CreateRobotRequest implements Request {
 	CreateRobotResponse response = new CreateRobotResponse();
+
 	Robot robot;
 
 	public CreateRobotRequest() {
@@ -20,13 +21,21 @@ public class CreateRobotRequest implements Request {
 
 	@Override
 	public Response process() throws Exception {
-		if (robot == null || robot.getX() < 0 || robot.getY() < 0) {
+		if (robot == null || robot.getCoordinateX() < 0 || robot.getCoordinateY() < 0) {
 			throw new InvalidInputException("Input is invalid");
 		}
 		MissionServiceManager manager = ServiceManager.getServiceManager().getMissionServiceManager();
-		manager.addRobot(robot.getX(), robot.getY(), robot.getDirection());
+		manager.addRobot(robot.getCoordinateX(), robot.getCoordinateY(), robot.getDirection());
 		response.setRobot(manager.getPlateau().getRobot());
 		return response;
+	}
+
+	public Robot getRobot() {
+		return robot;
+	}
+
+	public void setRobot(Robot robot) {
+		this.robot = robot;
 	}
 
 }

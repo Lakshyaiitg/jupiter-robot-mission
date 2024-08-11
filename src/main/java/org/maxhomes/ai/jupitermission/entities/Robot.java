@@ -1,39 +1,34 @@
 package org.maxhomes.ai.jupitermission.entities;
 
-import jakarta.json.bind.annotation.JsonbProperty;
-
 public class Robot {
-	@JsonbProperty("x")
-	public int x;
-	@JsonbProperty("y")
-	public int y;
-	@JsonbProperty("direction")
+	public int coordinateX;
+	public int coordinateY;
 	public Direction direction;
 
 	public Robot() {
 
 	}
 
-	public Robot(int x, int y, Direction direction) {
-		this.x = x;
-		this.y = y;
+	public Robot(int coordinateX, int coordinateY, Direction direction) {
+		this.coordinateX = coordinateX;
+		this.coordinateY = coordinateY;
 		this.direction = direction;
 	}
 
-	public int getX() {
-		return x;
+	public int getCoordinateX() {
+		return coordinateX;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setCoordinateX(int coordinateX) {
+		this.coordinateX = coordinateX;
 	}
 
-	public int getY() {
-		return y;
+	public int getCoordinateY() {
+		return coordinateY;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void setCoordinateY(int coordinateY) {
+		this.coordinateY = coordinateY;
 	}
 
 	public Direction getDirection() {
@@ -79,12 +74,12 @@ public class Robot {
 	}
 
 	public void move() {
-		this.x += direction.getMoveX();
-		this.y += direction.getMoveY();
+		this.coordinateX += direction.getMoveX();
+		this.coordinateY += direction.getMoveY();
 	}
 
 	public String toString() {
-		return this.x + " " + this.y + " " + this.direction;
+		return this.coordinateX + " " + this.coordinateY + " " + this.direction;
 	}
 
 	public void setDirectionFromString(String direction) {

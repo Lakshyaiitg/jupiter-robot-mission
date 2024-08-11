@@ -1,7 +1,5 @@
 package org.maxhomes.ai.jupitermission.resource;
 
-import org.maxhomes.ai.jupitermission.entities.Plateau;
-import org.maxhomes.ai.jupitermission.entities.Robot;
 import org.maxhomes.ai.jupitermission.requests.CreatePlateauWithRobotRequest;
 import org.maxhomes.ai.jupitermission.requests.CreateRobotRequest;
 import org.maxhomes.ai.jupitermission.requests.ExecuteRobotCommandRequest;
@@ -22,14 +20,13 @@ import jakarta.ws.rs.core.MediaType;
  */
 @Path("/resource")
 public class Resource {
-	Request request;
 	Response response;
 
 	@GET
 	@Path("/test")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String test() {
-		request = new TestRequest();
+		Request request = new TestRequest();
 		try {
 			response = request.process();
 		} catch (Exception e) {
@@ -44,10 +41,7 @@ public class Resource {
 	@Path("/createplateau")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createNewPlateau(CreatePlateauWithRobotRequest requestPayload) {
-		Plateau plateau = requestPayload.getPlateau();
-		Robot robot = requestPayload.getRobot();
-		request = new CreatePlateauWithRobotRequest(plateau, robot);
+	public Response createNewPlateau(CreatePlateauWithRobotRequest request) {
 		try {
 			response = request.process();
 		} catch (Exception e) {
@@ -62,8 +56,7 @@ public class Resource {
 	@Path("/createrobot")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createNewRobot(Robot robot) {
-		request = new CreateRobotRequest(robot);
+	public Response createNewRobot(CreateRobotRequest request) {
 		try {
 			response = request.process();
 		} catch (Exception e) {
@@ -78,11 +71,7 @@ public class Resource {
 	@Path("/executecommands")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String executeCommands(String commands) {
-		if (commands.startsWith("\"") && commands.endsWith("\"")) {
-			commands = commands.substring(1, commands.length() - 1);
-		}
-		request = new ExecuteRobotCommandRequest(commands);
+	public String executeCommands(ExecuteRobotCommandRequest request) {
 		try {
 			response = request.process();
 		} catch (Exception e) {

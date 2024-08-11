@@ -22,8 +22,8 @@ async function createPlateauWithRobot() {
             coordinateY: parseInt(plateauY, 10)
         },
         robot: {
-            x: parseInt(robotX, 10),
-            y: parseInt(robotY, 10),
+            coordinateX: parseInt(robotX, 10),
+            coordinateY: parseInt(robotY, 10),
             direction: robotDirection
         }
     };
@@ -52,20 +52,25 @@ async function createPlateauWithRobot() {
 // Function to execute commands via POST
 async function executeCommands() {
     const commands = document.getElementById('commands').value;
-
+    const requestPayload = {
+        commands: commands
+    };
+    
+    console.log('Sending payload:', requestPayload); 
+    
     try {
         const response = await fetch('http://localhost:8080/jupitermission/webapi/resource/executecommands', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(commands)
+            body: JSON.stringify(requestPayload)
         });
-
+        
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-
+        
         const data = await response.text();
         document.getElementById('commandsResult').textContent = `Commands Executed: ${data}`;
     } catch (error) {
@@ -73,6 +78,7 @@ async function executeCommands() {
         document.getElementById('commandsResult').textContent = `Error: ${error.message}`;
     }
 }
+
 
 
 // Function to create a plateau via GET
@@ -92,9 +98,11 @@ async function createRobot() {
     const robotDirection = document.getElementById('robotDirectionD').value;
 
     const requestPayload = {
-        x: parseInt(robotX, 10),
-        y: parseInt(robotY, 10),
-        direction: robotDirection
+        robot: {
+            coordinateX: parseInt(robotX, 10),
+            coordinateY: parseInt(robotY, 10),
+            direction: robotDirection
+        }
     };
 
     try {

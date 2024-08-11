@@ -41,8 +41,9 @@ public class CreatePlateauWithRobotRequest implements Request {
 	public Response process() throws Exception {
 		MissionServiceManager manager = ServiceManager.getServiceManager().getMissionServiceManager();
 		manager.createNewPlateau(plateau.getCoordinateX(), plateau.getCoordinateY());
-		manager.addRobot(robot.getX(), robot.getY(), robot.getDirection());
+		manager.addRobot(robot.getCoordinateX(), robot.getCoordinateY(), robot.getDirection());
 		response.setPlateau(manager.getPlateau());
+		System.out.println("Plateau Created!");
 		return response;
 	}
 }
