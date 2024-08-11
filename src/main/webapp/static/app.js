@@ -15,16 +15,20 @@ async function createPlateauWithRobot() {
     const robotX = document.getElementById('robotX').value;
     const robotY = document.getElementById('robotY').value;
     const robotDirection = document.getElementById('robotDirection').value;
+    if (!plateauX || !plateauY || !robotX || !robotY || !robotDirection) {
+        document.getElementById('plateauResult').textContent = 'Error: All fields must be filled out.';
+        return;
+    }
 
     const requestPayload = {
         plateau: {
             coordinateX: parseInt(plateauX, 10),
-            coordinateY: parseInt(plateauY, 10)
-        },
-        robot: {
-            coordinateX: parseInt(robotX, 10),
-            coordinateY: parseInt(robotY, 10),
-            direction: robotDirection
+            coordinateY: parseInt(plateauY, 10),
+            robot: {
+            	coordinateX: parseInt(robotX, 10),
+            	coordinateY: parseInt(robotY, 10),
+            	direction: robotDirection
+        	}
         }
     };
 
@@ -42,7 +46,16 @@ async function createPlateauWithRobot() {
         }
 
         const data = await response.json();
-        document.getElementById('plateauResult').textContent = `Plateau with Robot Created: ${JSON.stringify(data, null, 2)}`;
+        let formattedResult;
+        if (data.error) {
+            formattedResult = `<strong>Error:</strong> ${data.error}`;
+        } else {
+        	formattedResult = `
+            	<strong>Plateau:</strong> (${data.plateau.coordinateX}, ${data.plateau.coordinateY})<br/>
+            	<strong>Robot:</strong> (${data.plateau.robot.coordinateX}, ${data.plateau.robot.coordinateY}) facing ${data.plateau.robot.direction}
+        	`;
+        }
+        document.getElementById('plateauResult').innerHTML=formattedResult;
     } catch (error) {
         console.error('Error:', error);
         document.getElementById('plateauResult').textContent = `Error: ${error.message}`;
@@ -52,11 +65,13 @@ async function createPlateauWithRobot() {
 // Function to execute commands via POST
 async function executeCommands() {
     const commands = document.getElementById('commands').value;
+    if (!commands) {
+        document.getElementById('commandsResult').textContent = 'Error: Please Enter Some Command.';
+        return;
+    }
     const requestPayload = {
         commands: commands
     };
-    
-    console.log('Sending payload:', requestPayload); 
     
     try {
         const response = await fetch('http://localhost:8080/jupitermission/webapi/resource/executecommands', {
@@ -71,8 +86,16 @@ async function executeCommands() {
             throw new Error('Network response was not ok');
         }
         
-        const data = await response.text();
-        document.getElementById('commandsResult').textContent = `Commands Executed: ${data}`;
+        const data = await response.json();
+        let formattedResult;
+        if (data.error) {
+            formattedResult = `<strong>Error:</strong> ${data.error}`;
+        } else {
+            formattedResult = `
+                <strong>Commands Executed with New Position:</strong> (${data.robot.coordinateX}, ${data.robot.coordinateY}) facing ${data.robot.direction}
+            `;
+        }
+        document.getElementById('commandsResult').innerHTML=formattedResult;
     } catch (error) {
         console.error('Error:', error);
         document.getElementById('commandsResult').textContent = `Error: ${error.message}`;
@@ -96,6 +119,11 @@ async function createRobot() {
     const robotX = document.getElementById('robotXX').value;
     const robotY = document.getElementById('robotYY').value;
     const robotDirection = document.getElementById('robotDirectionD').value;
+    
+    if (!robotDirection || !robotX || !robotY) {
+        document.getElementById('robotResult').textContent = 'Error: Please Fill all the fields';
+        return;
+    }
 
     const requestPayload = {
         robot: {
@@ -119,7 +147,15 @@ async function createRobot() {
         }
 
         const data = await response.json();
-        document.getElementById('robotResult').textContent = `Robot Created: ${JSON.stringify(data, null, 2)}`;
+        let formattedResult;
+        if (data.error) {
+            formattedResult = `<strong>Error:</strong> ${data.error}`;
+        } else {
+        	formattedResult = `
+            	<strong>Robot:</strong> (${data.robot.coordinateX}, ${data.robot.coordinateY}) facing ${data.robot.direction}
+        	`;
+        }
+        document.getElementById('robotResult').innerHTML=formattedResult;
     } catch (error) {
         console.error('Error:', error);
         document.getElementById('robotResult').textContent = `Error: ${error.message}`;

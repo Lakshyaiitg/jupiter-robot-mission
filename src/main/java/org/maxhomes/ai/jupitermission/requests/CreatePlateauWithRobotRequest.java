@@ -1,7 +1,7 @@
 package org.maxhomes.ai.jupitermission.requests;
 
 import org.maxhomes.ai.jupitermission.entities.Plateau;
-import org.maxhomes.ai.jupitermission.entities.Robot;
+import org.maxhomes.ai.jupitermission.exceptions.InvalidInputException;
 import org.maxhomes.ai.jupitermission.responses.CreatePlateauWithRobotResponse;
 import org.maxhomes.ai.jupitermission.responses.Response;
 import org.maxhomes.ai.jupitermission.services.MissionServiceManager;
@@ -11,14 +11,12 @@ public class CreatePlateauWithRobotRequest implements Request {
 	CreatePlateauWithRobotResponse response = new CreatePlateauWithRobotResponse();
 
 	private Plateau plateau;
-	private Robot robot;
 
 	public CreatePlateauWithRobotRequest() {
 	}
 
-	public CreatePlateauWithRobotRequest(Plateau plateau, Robot robot) {
+	public CreatePlateauWithRobotRequest(Plateau plateau) {
 		this.plateau = plateau;
-		this.robot = robot;
 	}
 
 	public Plateau getPlateau() {
@@ -29,20 +27,16 @@ public class CreatePlateauWithRobotRequest implements Request {
 		this.plateau = plateau;
 	}
 
-	public Robot getRobot() {
-		return robot;
-	}
-
-	public void setRobot(Robot robot) {
-		this.robot = robot;
-	}
-
 	@Override
 	public Response process() throws Exception {
 		MissionServiceManager manager = ServiceManager.getServiceManager().getMissionServiceManager();
-		manager.createNewPlateau(plateau.getCoordinateX(), plateau.getCoordinateY());
-		manager.addRobot(robot.getCoordinateX(), robot.getCoordinateY(), robot.getDirection());
-		response.setPlateau(manager.getPlateau());
+		if (this.plateau == null || this.plateau.getRobot() == null
+				|| this.plateau.getRobot().getCoordinateX() > this.plateau.getCoordinateX()
+				|| this.plateau.getRobot().getCoordinateY() > this.plateau.getCoordinateY()) {
+			throw new InvalidInputException("Error Creating Plateau!!!!!");
+		}
+		manager.setNewPlateau(plateau);
+		response.setPlateau(plateau);
 		System.out.println("Plateau Created!");
 		return response;
 	}

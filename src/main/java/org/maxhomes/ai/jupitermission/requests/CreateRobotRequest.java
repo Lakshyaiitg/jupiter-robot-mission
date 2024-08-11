@@ -21,7 +21,7 @@ public class CreateRobotRequest implements Request {
 
 	@Override
 	public Response process() throws Exception {
-		if (robot == null || robot.getCoordinateX() < 0 || robot.getCoordinateY() < 0) {
+		if (robot == null || robot.getCoordinateX() < 0 || robot.getCoordinateY() < 0 || robot.getDirection() == null) {
 			throw new InvalidInputException("Input is invalid");
 		}
 		MissionServiceManager manager = ServiceManager.getServiceManager().getMissionServiceManager();

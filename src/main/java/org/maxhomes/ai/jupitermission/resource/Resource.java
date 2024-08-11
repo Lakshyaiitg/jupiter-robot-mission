@@ -70,16 +70,15 @@ public class Resource {
 	@POST
 	@Path("/executecommands")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String executeCommands(ExecuteRobotCommandRequest request) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response executeCommands(ExecuteRobotCommandRequest request) {
 		try {
 			response = request.process();
 		} catch (Exception e) {
 			response = new ErrorResponse();
 			response.setError(e.getMessage());
 			System.err.println("Error Moving robot " + e.getMessage());
-			return response.getError();
 		}
-		return response.toString();
+		return response;
 	}
 }
