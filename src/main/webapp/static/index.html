@@ -20,7 +20,7 @@
             display: block;
             margin-bottom: 5px;
         }
-        input, button {
+        input, button, textarea {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -38,58 +38,41 @@
     <div class="container">
         <h1>Jupiter Mission Control</h1>
 
-        <!-- Create Plateau using POST -->
-		<h2>Create Exploration Site with Robot 🚀🤖</h2>
-		<div class="form-group">
-    		<label for="plateauX">Plateau X Coordinate:</label>
-    		<input type="number" id="plateauX" placeholder="Enter X coordinate">
-		</div>
-		<div class="form-group">
-    		<label for="plateauY">Plateau Y Coordinate:</label>
-    		<input type="number" id="plateauY" placeholder="Enter Y coordinate">
-		</div>
-		<div class="form-group">
-    		<label for="robotX">Robot X Coordinate:</label>
-    		<input type="number" id="robotX" placeholder="Enter Robot X coordinate">
-		</div>
-		<div class="form-group">
-    		<label for="robotY">Robot Y Coordinate:</label>
-    		<input type="number" id="robotY" placeholder="Enter Robot Y coordinate">
-		</div>
-		<div class="form-group">
-    		<label for="robotDirection">Robot Direction:</label>
-    		<input type="text" id="robotDirection" placeholder="Enter Robot Direction(N,S,E,W)">
-		</div>
-		<button onclick="createPlateauWithRobot()">Create Plateau with Robot</button>
-		<div id="plateauResult" class="result"></div>
-		
-		<!-- Create Robot using POST -->
-		<h2>Add New Robot 🤖</h2>
-		<div class="form-group">
-    		<label for="robotXX">Robot X Coordinate:</label>
-    		<input type="number" id="robotXX" placeholder="Enter Robot X coordinate">
-		</div>
-		<div class="form-group">
-    		<label for="robotYY">Robot Y Coordinate:</label>
-    		<input type="number" id="robotYY" placeholder="Enter Robot Y coordinate">
-		</div>
-		<div class="form-group">
-    		<label for="robotDirectionD">Robot Direction:</label>
-    		<input type="text" id="robotDirectionD" placeholder="Enter Robot Direction(N,S,E,W)">
-		</div>
-		<button onclick="createRobot()">Create Robot</button>
-		<div id="robotResult" class="result"></div>
-		
-		<!-- Execute Commands using POST -->
-		<h2>Execute Commands ⌨️</h2>
-		<div class="form-group">
-    		<label for="commands">Commands:</label>
-    		<textarea id="commands" placeholder="Enter commands here..."></textarea>
-		</div>
-		<button onclick="executeCommands()">Execute Commands</button>
-		<div id="commandsResult" class="result"></div>
-		
+        <!-- Create Plateau and Add Robot -->
+        <h2>Create Exploration Site with Robot 🚀🤖</h2>
+        <div class="form-group">
+            <label for="plateauX">Plateau X Coordinate:</label>
+            <input type="number" id="plateauX" placeholder="Enter X coordinate">
+        </div>
+        <div class="form-group">
+            <label for="plateauY">Plateau Y Coordinate:</label>
+            <input type="number" id="plateauY" placeholder="Enter Y coordinate">
+        </div>
+        <div class="form-group">
+            <label for="robotX">Robot X Coordinate:</label>
+            <input type="number" id="robotX" placeholder="Enter Robot X coordinate">
+        </div>
+        <div class="form-group">
+            <label for="robotY">Robot Y Coordinate:</label>
+            <input type="number" id="robotY" placeholder="Enter Robot Y coordinate">
+        </div>
+        <div class="form-group">
+            <label for="robotDirection">Robot Direction:</label>
+            <input type="text" id="robotDirection" placeholder="Enter Robot Direction (N, S, E, W)">
+        </div>
+        <button onclick="createPlateau()">Create Plateau</button>
+        <button onclick="createRobot()">Add Robot</button>
+        <div id="plateauResult" class="result"></div>
+        <div id="robotResult" class="result"></div>
 
+        <!-- Execute Commands -->
+        <h2>Execute Commands ⌨️</h2>
+        <div class="form-group">
+            <label for="commands">Commands:</label>
+            <textarea id="commands" placeholder="Enter commands here..."></textarea>
+        </div>
+        <button onclick="executeCommands()">Execute Commands</button>
+        <div id="commandsResult" class="result"></div>
     </div>
 
     <script src="app.js"></script>

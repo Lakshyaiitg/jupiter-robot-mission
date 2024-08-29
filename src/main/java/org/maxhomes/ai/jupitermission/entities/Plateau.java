@@ -1,41 +1,15 @@
 package org.maxhomes.ai.jupitermission.entities;
 
-public class Plateau implements ExplorationSite {
-	private int coordinateX;
-	private int coordinateY;
+public interface Plateau {
+	int getCoordinateX();
 
-	private Robot robot;
+	int getCoordinateY();
 
-	public Plateau() {
-	}
+	Robot getRobot();
 
-	public Plateau(int coordinateX, int coordinateY) {
-		super();
-		this.coordinateX = coordinateX;
-		this.coordinateY = coordinateY;
-	}
+	void setRobot(Robot robot);
 
-	public int getCoordinateX() {
-		return coordinateX;
-	}
+	void setCoordinateX(int coordinateX);
 
-	public void setCoordinateX(int coordinateX) {
-		this.coordinateX = coordinateX;
-	}
-
-	public int getCoordinateY() {
-		return coordinateY;
-	}
-
-	public void setCoordinateY(int coordinateY) {
-		this.coordinateY = coordinateY;
-	}
-
-	public Robot getRobot() {
-		return robot;
-	}
-
-	public void setRobot(Robot robot) {
-		this.robot = robot;
-	}
+	void setCoordinateY(int coordinateY);
 }

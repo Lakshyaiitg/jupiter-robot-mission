@@ -1,101 +1,23 @@
 package org.maxhomes.ai.jupitermission.entities;
 
-public class Robot {
-	public int coordinateX;
-	public int coordinateY;
-	public Direction direction;
+public interface Robot {
+	int getCoordinateX();
 
-	public Robot() {
+	int getCoordinateY();
 
-	}
+	Direction getDirection();
 
-	public Robot(int coordinateX, int coordinateY, Direction direction) {
-		this.coordinateX = coordinateX;
-		this.coordinateY = coordinateY;
-		this.direction = direction;
-	}
+	void setDirection(Direction direction);
 
-	public int getCoordinateX() {
-		return coordinateX;
-	}
+	void setCoordinateX(int coordinateX);
 
-	public void setCoordinateX(int coordinateX) {
-		this.coordinateX = coordinateX;
-	}
+	void setCoordinateY(int coordinateY);
 
-	public int getCoordinateY() {
-		return coordinateY;
-	}
+	void turnRight();
 
-	public void setCoordinateY(int coordinateY) {
-		this.coordinateY = coordinateY;
-	}
+	void turnLeft();
 
-	public Direction getDirection() {
-		return direction;
-	}
+	void move();
 
-	public void setDirection(Direction direction) {
-		this.direction = direction;
-	}
-
-	public void turnRight() {
-		switch (this.direction) {
-		case N:
-			this.direction = Direction.E;
-			break;
-		case S:
-			this.direction = Direction.W;
-			break;
-		case E:
-			this.direction = Direction.S;
-			break;
-		case W:
-			this.direction = Direction.N;
-			break;
-		}
-	}
-
-	public void turnLeft() {
-		switch (this.direction) {
-		case N:
-			this.direction = Direction.W;
-			break;
-		case S:
-			this.direction = Direction.E;
-			break;
-		case E:
-			this.direction = Direction.N;
-			break;
-		case W:
-			this.direction = Direction.S;
-			break;
-		}
-	}
-
-	public void move() {
-		this.coordinateX += direction.getMoveX();
-		this.coordinateY += direction.getMoveY();
-	}
-
-	public String toString() {
-		return this.coordinateX + " " + this.coordinateY + " " + this.direction;
-	}
-
-	public void setDirectionFromString(String direction) {
-		switch (direction) {
-		case "W":
-			this.direction = Direction.W;
-			break;
-		case "E":
-			this.direction = Direction.E;
-			break;
-		case "N":
-			this.direction = Direction.N;
-			break;
-		case "S":
-			this.direction = Direction.S;
-			break;
-		}
-	}
+	String toString();
 }
