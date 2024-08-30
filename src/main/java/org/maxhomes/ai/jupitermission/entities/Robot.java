@@ -17,7 +17,7 @@ public interface Robot {
 
 	void turnLeft();
 
-	void move();
+	void moveForward();
 
 	String toString();
 }

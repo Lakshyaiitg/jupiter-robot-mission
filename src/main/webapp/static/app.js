@@ -9,8 +9,8 @@ async function createPlateau() {
     }
 
     const plateauPayload = {
-        coordinateX: parseInt(plateauX, 10),
-        coordinateY: parseInt(plateauY, 10)
+        upperX: parseInt(plateauX, 10),
+        upperY: parseInt(plateauY, 10)
     };
 
     try {
@@ -23,13 +23,14 @@ async function createPlateau() {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            const data = await response.json();
+            throw new Error(data.message);
         }
 
         const data = await response.json();
         let formattedResult;
         if (data.success) {
-            formattedResult = `<strong>Plateau:</strong> (${data.data.coordinateX}, ${data.data.coordinateY})`;
+            formattedResult = `<strong>Plateau:</strong> (${data.data.upperX}, ${data.data.upperY})`;
         } else {
             formattedResult = `<strong>Error:</strong> ${data.message}`;
         }
@@ -67,7 +68,8 @@ async function createRobot() {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            const data = await response.json();
+            throw new Error(data.message);
         }
 
         const data = await response.json();
@@ -104,13 +106,14 @@ async function executeCommands() {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            const data = await response.json();
+            throw new Error(data.message);
         }
 
         const data = await response.json();
         let formattedResult;
         if (data.success) {
-            const position = data.data; // Adjust based on actual response structure
+            const position = data.data;
             formattedResult = `
                 <strong>Commands Executed with New Position:</strong> ${position}
             `;

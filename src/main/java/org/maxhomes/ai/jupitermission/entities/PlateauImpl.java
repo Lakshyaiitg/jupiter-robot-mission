@@ -2,26 +2,26 @@ package org.maxhomes.ai.jupitermission.entities;
 
 public class PlateauImpl implements Plateau {
 
-	private int coordinateX;
-	private int coordinateY;
+	private int upperX;
+	private int upperY;
 	private Robot robot;
 
 	public PlateauImpl(int coordinateX, int coordinateY) {
-		this.coordinateX = coordinateX;
-		this.coordinateY = coordinateY;
+		this.upperX = coordinateX;
+		this.upperY = coordinateY;
 	}
 
 	public PlateauImpl() {
 	}
 
 	@Override
-	public int getCoordinateX() {
-		return coordinateX;
+	public int getUpperX() {
+		return upperX;
 	}
 
 	@Override
-	public int getCoordinateY() {
-		return coordinateY;
+	public int getUpperY() {
+		return upperY;
 	}
 
 	@Override
@@ -35,12 +35,12 @@ public class PlateauImpl implements Plateau {
 	}
 
 	@Override
-	public void setCoordinateX(int coordinateX) {
-		this.coordinateX = coordinateX;
+	public void setUpperX(int coordinateX) {
+		this.upperX = coordinateX;
 	}
 
 	@Override
-	public void setCoordinateY(int coordinateY) {
-		this.coordinateY = coordinateY;
+	public void setUpperY(int coordinateY) {
+		this.upperY = coordinateY;
 	}
 }

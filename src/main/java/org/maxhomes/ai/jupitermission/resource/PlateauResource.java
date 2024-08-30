@@ -1,8 +1,8 @@
 package org.maxhomes.ai.jupitermission.resource;
 
 import org.maxhomes.ai.jupitermission.entities.PlateauImpl;
+import org.maxhomes.ai.jupitermission.manager.ServiceManager;
 import org.maxhomes.ai.jupitermission.services.PlateauService;
-import org.maxhomes.ai.jupitermission.services.ServiceManager;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -24,7 +24,7 @@ public class PlateauResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public jakarta.ws.rs.core.Response createPlateau(PlateauImpl plateau) {
 		try {
-			plateauService.createPlateau(plateau.getCoordinateX(), plateau.getCoordinateY());
+			plateauService.createPlateau(plateau.getUpperX(), plateau.getUpperY());
 			return jakarta.ws.rs.core.Response.status(Status.OK)
 					.entity(new Response(true, "Plateau created successfully", plateau)).build();
 		} catch (Exception e) {

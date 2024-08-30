@@ -82,7 +82,7 @@ public class RobotImpl implements Robot {
 	}
 
 	@Override
-	public void move() {
+	public void moveForward() {
 		this.coordinateX += this.direction.getMoveX();
 		this.coordinateY += this.direction.getMoveY();
 	}

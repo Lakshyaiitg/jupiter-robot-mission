@@ -1,8 +1,8 @@
 package org.maxhomes.ai.jupitermission.resource;
 
 import org.maxhomes.ai.jupitermission.entities.RobotImpl;
+import org.maxhomes.ai.jupitermission.manager.ServiceManager;
 import org.maxhomes.ai.jupitermission.services.RobotService;
-import org.maxhomes.ai.jupitermission.services.ServiceManager;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.PUT;

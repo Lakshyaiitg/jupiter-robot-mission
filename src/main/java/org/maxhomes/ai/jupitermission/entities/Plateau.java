@@ -1,15 +1,15 @@
 package org.maxhomes.ai.jupitermission.entities;
 
 public interface Plateau {
-	int getCoordinateX();
+	int getUpperX();
 
-	int getCoordinateY();
+	int getUpperY();
 
 	Robot getRobot();
 
 	void setRobot(Robot robot);
 
-	void setCoordinateX(int coordinateX);
+	void setUpperX(int coordinateX);
 
-	void setCoordinateY(int coordinateY);
+	void setUpperY(int coordinateY);
 }
